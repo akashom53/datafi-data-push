@@ -107,7 +107,7 @@ class _FormPageState extends State<FormPage> {
             ));
 
     try {
-      final resp = await http.post("https://api.datafi.app/master/industry",
+      final resp = await http.post("https://api.datafi.app/master/app",
           body: jsonEncode(requestMap));
       Navigator.of(context).pop();
 

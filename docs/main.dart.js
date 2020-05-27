@@ -24788,7 +24788,7 @@ n=P.aI(["name",a,"industryId",b,"authEnabled",!0,"registerAllow",!0,"sections",h
 E.Uw(new X.Qc(),o.c,l)
 r=3
 t=6
-return P.ap(G.a7u("https://api.datafi.app/master/industry",C.bG.AZ(n,null)),$async$ml)
+return P.ap(G.a7u("https://api.datafi.app/master/app",C.bG.AZ(n,null)),$async$ml)
 case 6:m=e
 k=o.c.eF(u.C)
 k.cF()
