@@ -45,25 +45,68 @@ class _FormPageState extends State<FormPage> {
     "Water & Sewer": "5eba49fcfbd9fd1ad27cc7dd"
   };
 
+  String getIndustryName(int row, int col) {
+    int index = (5 * row) + col;
+    if (index < _industries.keys.length)
+      return _industries.keys.elementAt(index);
+    return null;
+  }
+
   void _showIndustryChooser(context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return Container(
-            child: new Wrap(
-              children: _industries.keys
-                  .map<Widget>((e) => new ListTile(
-                      title: new Text(e),
-                      onTap: () {
-                        setState(() {
-                          _chosenIndustry = e;
-                        });
-                        Navigator.of(context).pop();
-                      }))
+      context: context,
+      builder: (BuildContext bc) {
+        return Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: List<int>.generate(
+                (_industries.keys.length ~/ 5) + 1,
+                (index) => index,
+              )
+                  .map<Widget>(
+                    (row) => Row(
+                      children:
+                          List<int>.generate(5, (index) => index).map<Widget>(
+                        (col) {
+                          String industryName = getIndustryName(row, col);
+                          if (industryName == null) return Container();
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _chosenIndustry = industryName;
+                                Navigator.of(context).pop();
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: Offset(0, 2),
+                                      blurRadius: 4,
+                                      spreadRadius: 4,
+                                    ),
+                                  ]),
+                              height: 100,
+                              width:
+                                  (MediaQuery.of(context).size.width - 100) / 5,
+                              margin: const EdgeInsets.all(10),
+                              child: Center(
+                                child: Text(industryName),
+                              ),
+                            ),
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  )
                   .toList(),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   submitApp(
@@ -107,8 +150,11 @@ class _FormPageState extends State<FormPage> {
             ));
 
     try {
-      final resp = await http.post("https://api.datafi.app/master/app",
-          body: jsonEncode(requestMap));
+      final resp = await http.post(
+        "https://api.datafi.app/master/app",
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(requestMap),
+      );
       Navigator.of(context).pop();
 
       if (resp.statusCode == 200) {
@@ -127,7 +173,6 @@ class _FormPageState extends State<FormPage> {
         );
       }
     } catch (e) {
-
       Navigator.of(context).pop();
       showDialog(
         context: context,
