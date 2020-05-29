@@ -121,7 +121,7 @@ class _FormPageState extends State<FormPage> {
       List<Map<String, dynamic>> fieldsMap = [];
       section.fields.asMap().forEach((index, field) {
         Map<String, dynamic> fieldMap = {
-          "label": " date",
+          "label": field.typeKey,
           "type": field.typeKey,
           "displayIndex": "$index"
         };
@@ -211,8 +211,8 @@ class _FormPageState extends State<FormPage> {
       return false;
     }
     for (var section in sections) {
-      if (section.name == null) {
-        section.name = "";
+      if (section.name == null || section.name.length == 0) {
+        section.name = "default";
       }
       if (section.fields.length == 0) {
         showError("Please add fields to Section ${section.name}");
