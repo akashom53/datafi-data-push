@@ -211,9 +211,8 @@ class _FormPageState extends State<FormPage> {
       return false;
     }
     for (var section in sections) {
-      if (section.name == null || section.name.length == 0) {
-        showError("Section name cannot be empty");
-        return false;
+      if (section.name == null) {
+        section.name = "";
       }
       if (section.fields.length == 0) {
         showError("Please add fields to Section ${section.name}");
