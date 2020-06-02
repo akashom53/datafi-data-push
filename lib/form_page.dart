@@ -123,7 +123,7 @@ class _FormPageState extends State<FormPage> {
       List<Map<String, dynamic>> fieldsMap = [];
       section.fields.asMap().forEach((index, field) {
         Map<String, dynamic> fieldMap = {
-          "label": field.typeKey,
+          "label": field.name,
           "type": field.typeKey,
           "displayIndex": "$index"
         };
