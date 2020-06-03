@@ -44,7 +44,9 @@ class _FormPageState extends State<FormPage> {
     "Tourism": "5eba49fcfbd9fd1ad27cc7dc",
     "Water & Sewer": "5eba49fcfbd9fd1ad27cc7dd",
     "Archaeology": "5ed60175091009ad14c2fbcc",
-    "COVID 19 Responses": "5ed601b8091009ad14c2fbcd"
+    "COVID 19 Responses": "5ed601b8091009ad14c2fbcd",
+    "Transportation":"5ed63b49def376a839853b2d",
+    "GIS": "5ed7572d5f10267647629c60",
   };
 
   String getIndustryName(int row, int col) {
